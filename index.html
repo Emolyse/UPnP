@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="UPnP">
+<head>
+    <title>UPnP</title>
+    <meta charset="utf-8"/>
+    <style>
+        .brick{
+            display: flex;
+            flex-flow: row nowrap;
+        }
+        .brick > img{
+            height: 50px;
+            vertical-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+</head>
+<body ng-controller="UPnPController as ctrl">
+<h1>UPnP</h1>
+<section>
+    <section class="brick" ng-repeat="brick in ctrl.context.bricks">
+        <img ng-src="{{brick.iconURL}}" ng-click="ctrl.Browse(brick)">
+        <p ng-bind="brick.name"></p>
+        <p ng-bind="brick.name"></p>
+    </section>
+    <media-explorer
+        title="mon super"
+        bricks="ctrl.context.bricks"
+        >
+    </media-explorer>
+</section>
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+<script src="./bundleUPnP.js"></script>
+</body>
+</html>

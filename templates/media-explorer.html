@@ -1,0 +1,11 @@
+<h2>{{title}}</h2>
+<p class="breadCrumb"><label ng-repeat="ad in mc.breadCrumb"></label></p>
+<md-content class="servers">
+	<md-card ng-repeat="server in bricks|toArray:false|filter:{type:'BrickUPnP_MediaServer'}">
+	blabla
+	</md-card>
+</md-content>
+<md-content class="directories">
+	<md-card class="directory" ng-repeat="cont in mc.containers">
+	</md-card>
+</md-content>
