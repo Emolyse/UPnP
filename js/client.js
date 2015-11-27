@@ -8,8 +8,13 @@ angular.module("UPnP", ['ngMaterial','ui.router','angular-toArrayFilter'])
     .controller("UPnPController", function ($scope,$http) {
         var ctrl = this;
         $http.get("/getContext").success(function (data) {
-            ctrl.context = data;
-            console.log("ctrl.context");
+            //ctrl.context = data;
+            ctrl.context = {bricks:{}};
+            for(var i in data.bricks){
+                console.log();
+                ctrl.context.bricks[data.bricks[i].id]=data.bricks[i];
+            }
+            console.log(data);
             console.log("ctrl.context.bricks", ctrl.context.bricks);
 
             utils.io.on("brickAppears", function (data) {
@@ -45,6 +50,7 @@ angular.module("UPnP", ['ngMaterial','ui.router','angular-toArrayFilter'])
             ,controllerAs:"mc"
             ,controller:function($scope){
                 this.breadCrumb = [];
+                this.bricks = $scope.bricks;
             }
         }
     });

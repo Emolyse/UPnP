@@ -1,10 +1,24 @@
+<style type="text/css"></style>
 <h2>{{title}}</h2>
 <p class="breadCrumb"><label ng-repeat="ad in mc.breadCrumb"></label></p>
-<md-content class="servers">
-	<md-card ng-repeat="server in bricks|toArray:false|filter:{type:'BrickUPnP_MediaServer'}">
-	blabla
-	</md-card>
+<md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
+      <md-card ng-repeat="server in mc.bricks|toArray:false|filter:{type:'BrickUPnP_MediaServer'}">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card with image</span>
+            <span class="md-subhead">Large</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
 </md-content>
+
 <md-content class="directories">
 	<md-card class="directory" ng-repeat="cont in mc.containers">
 	</md-card>
