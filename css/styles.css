@@ -1,0 +1,9 @@
+.md-tab{
+    padding: 12px 23px;
+}
+md-tabs.md-default-theme.md-accent, md-tabs.md-accent > md-tabs-wrapper{
+    background-color: #424242;
+}
+md-tabs.md-default-theme.md-accent, md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]){
+    color: #BDBDBD;
+}
