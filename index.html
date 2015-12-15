@@ -26,7 +26,10 @@
                     <md-tab-body>
                         <section class="md-padding">
                             <img ng-src="{{brick.iconURL}}" ng-click="ctrl.Browse(brick)">
-                            <p ng-bind="brick.name"></p>
+                            <media-explorer
+                            title="{{brick.name}}"
+                            brick="brick"
+                            explorer="ctrl.context.explorer"></media-explorer>
                         </section>
                     </md-tab-body>
                 </md-tab>

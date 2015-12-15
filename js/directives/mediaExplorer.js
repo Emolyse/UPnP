@@ -4,14 +4,14 @@ module.exports = function(app,utils) {
             restrict:'E'
             ,templateUrl:'templates/media-explorer.html'
             ,scope:{
-                bricks:"=bricks"//
+                brick:"=brick"//
                 ,explorer:"=explorer"
                 ,title:"@title"}//Chaine passée directement
             ,controllerAs:"mc"
             ,controller:function ($scope,$location,$http) {
                 var ctrl = this;
                 ctrl.breadCrumb = [$scope.title];
-                ctrl.bricks = $scope.bricks;
+                ctrl.brick = $scope.brick;
                 ctrl.explorer = $scope.explorer;
                 ctrl.Browse = function (brick,dirId) {
                     console.log("bananas");
@@ -38,13 +38,14 @@ module.exports = function(app,utils) {
                                 if(children)
                                     for(var j=0;j<children.length;j++){
                                         var name = children[j].tagName+"";
-                                        //name = name.split(':');
-                                        //name = name[name.length-1];
+                                        name = name.split(':');
+                                        name = name[name.length-1];
                                         dir[name]=children[i].textContent;
                                     }
                                 ctrl.explorer.push(dir);
                             }
                             $scope.$apply();
+                            console.log(ctrl.explorer);
                         });
                 }
             }

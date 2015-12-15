@@ -49,13 +49,14 @@ module.exports = function(app,utils) {
                         if(children)
                             for(var j=0;j<children.length;j++){
                                 var name = children[j].tagName+"";
-                                //name = name.split(':');
-                                //name = name[name.length-1];
+                                name = name.split(':');
+                                name = name[name.length-1];
                                 dir[name]=children[i].textContent;
                             }
                         ctrl.context.explorer.push(dir);
                     }
                     $scope.$apply();
+                    console.log(ctrl.context.explorer);
                 });
         }
 
