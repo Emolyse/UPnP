@@ -31,17 +31,15 @@
                                     <img ng-src="{{dir.iconURL}}" ng-click="ctrl.browses(brick, dir.directory)">
                                 </div>
                             </section>
-                            <section class="flex" layout="column">
+                            <section class="flex" layout="row">
                                 <div class="flex" ng-repeat="media in ctrl.context.medias">
                                     <h2>{{media.name}}</h2>
                                     <img ng-src="{{media.iconURL}}" ng-click="ctrl.loadMedias(media.serverId, ctrl.context.rendererId, media.mediaId)">
-                                    <button ng-click="ctrl.loadMedias(media.serverId, ctrl.context.rendererId, media.mediaId)">LOAD</button>
+                                    <md-button class="md-mini md-fab" aria-label="Eat cake" ng-click="ctrl.loadMedias(media.serverId, ctrl.context.rendererId, media.mediaId)">
+                                        <md-icon md-svg-src="img/refresh.svg"></md-icon>
+                                    </md-button>
+                                    <!--<button ng-click="ctrl.loadMedias(media.serverId, ctrl.context.rendererId, media.mediaId)">LOAD</button>-->
                                 </div>
-                            </section>
-                            <section>
-                            <player
-                                renderer="ctrl.context.rendererId"
-                            </player>
                             </section>
                             <!--<media-explorer-->
                             <!--title="{{brick.name}}"-->
@@ -51,20 +49,29 @@
                         </section>
                         {{ctrl.context.loadedMedia}}<br>
                         {{ctrl.context.rendererId}}
-                        <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
-                            <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
-                            <media-renderer
-                                 title="renderer.name"
-                                       brick="brick"
-                                    media="ctrl.context.medias">
-                            </media-renderer>
-                        </section>
+
+
+
                     </md-tab-body>
                 </md-tab>
             </section>
         </md-tabs>
     </md-content>
-
+    <!-- MEDIA PLAYER -->
+    <section layout="row" layout-align="space-between center" class="player">
+        <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}" class="rendererIcon">
+            <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+            <media-renderer
+                    title="renderer.name"
+                    brick="brick"
+                    media="ctrl.context.medias">
+            </media-renderer>
+        </section>
+        <player
+                renderer="ctrl.context.rendererId">
+        </player>
+        <div class="nomLecture">Nom du fichier en cours de lecture</div>
+    </section>
     <!--Pour plus tard: pour gérer les palettes de couleurs on peut récupérer un template déjà prêt-->
 
 <script src="bower_components/angular/angular.min.js"></script>

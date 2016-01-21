@@ -1,3 +1,9 @@
+body{
+    margin: 0;
+}
+md-content{
+    height: 100%;
+}
 .md-tab{
     padding: 12px 23px;
 }
@@ -34,4 +40,29 @@ md-card md-card-content {
 .directory img{
     min-width: 130px;
     max-width: 170px;
+}
+.player{
+    position: absolute;
+    width: 100%;
+    padding: 5px 10px;
+    text-align: right;
+    bottom: 0px;
+    left: 0;
+    background-color: #E0E0E0;
+}
+.player img{
+    width: 50px;
+}
+md-slider{
+    width: 100px;
+}
+.volume{
+    width: 200px;
+}
+.nomLecture{
+    margin-right: auto;
+}
+.rendererIcon{
+    margin-left: 5px;
+    margin-right: auto;
 }
