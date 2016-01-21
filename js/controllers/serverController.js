@@ -1,14 +1,14 @@
 module.exports = function(app,utils) {
     app.controller("sc", ['$scope','$location', '$http',function ($scope,$location,$http) {
         var ctrl = this;
-        ctrl.firstbrick = {};
+        ctrl.context = {bricks:{}};
+
         $http.get("/getContext").success(function (data) {
             //ctrl.context = data;
-            ctrl.context = {bricks:{}};
             var init = true;
-            for(var i in data.bricks){
-                ctrl.context.bricks[data.bricks[i].id]=data.bricks[i];
-                if(init){
+            for(var i in data.bricks) {
+                ctrl.context.bricks[data.bricks[i].id] = data.bricks[i];
+                if(init &&  ctrl.context.bricks[i].type[2] === "BrickUPnP_MediaServer"){
                     ctrl.firstbrick = data.bricks[i];
                     init = false;
                 }
@@ -21,13 +21,12 @@ module.exports = function(app,utils) {
             utils.io.on("brickDisappears", function (data) {
                 delete ctrl.context.bricks[data.id];
             });
-
-            ctrl.context.explorer = [];
             ctrl.context.directories= [];
             ctrl.context.medias = [];
-            ctrl.rendererId = '-1';
+            ctrl.context.rendererId = '-1';
             ctrl.browses(ctrl.firstbrick, 0);
         });
+        ctrl.context.loadedMedia = -1;
 
         /**
          * @name Browse
@@ -35,42 +34,6 @@ module.exports = function(app,utils) {
          * @param brick 
          * @param dirId 
          */
-        ctrl.Browse = function (brick,dirId) {
-            if(!dirId)
-                dirId = 0;
-            utils.call(brick.id
-                , "Browse"
-                , [dirId]
-                , function (str) {
-                    var parser = new DOMParser();
-                    ctrl.context.explorer.splice(0,ctrl.context.explorer.length);
-                    var doc = parser.parseFromString(str, "text/xml");
-                    var res = doc.querySelector("Result");
-                    var content = parser.parseFromString(res.textContent, "text/xml");
-                    var containers = content.querySelectorAll("container");
-                    for(var i=0;i<containers.length;i++){
-                        var dir = {};
-                        var attr = containers[i].attributes;
-                        if(attr)
-                            for(var j=0;j<attr.length;j++){
-                                dir[attr[j].name]=attr[j].value;
-                            }
-                        var children = containers[i].children;
-                        if(children)
-                            for(var j=0;j<children.length;j++){
-                                var name = children[j].tagName+"";
-                                name = name.split(':');
-                                name = name[name.length-1];
-                                dir[name]=children[i].textContent;
-                            }
-                        ctrl.context.explorer.push(dir);
-                    }
-                    $scope.$apply();
-                    console.log(ctrl.context.explorer);
-                });
-        }
-
-
         ctrl.browses = function (brick, dirId) {
 
             utils.call(brick.id
@@ -83,7 +46,6 @@ module.exports = function(app,utils) {
                     var json = {medias: [], directories: []};
                     var doc = parser.parseFromString(str, "text/xml");
                     var Result = doc.querySelector('Result');
-                    console.log(str);
                     if(Result) {
                         var ResultDoc = parser.parseFromString(Result.textContent, "text/xml");
                         var L_containers = ResultDoc.querySelectorAll('container'), i, title, icon;
@@ -101,17 +63,18 @@ module.exports = function(app,utils) {
                             json.medias.push( {serverId: brick.id, name: title, iconURL: icon, mediaId: item.getAttribute("id")} );
                         }
                     }
-                    console.log(json);
                     ctrl.context.directories = json.directories;
                     ctrl.context.medias = json.medias;
-                    console.log(ctrl.context.directories);
                 });
         };
 
-        ctrl.loadMedias = function (serverId, rendererId, mediaID){
+        ctrl.loadMedias = function (serverId, rendererId, mediaId){
             utils.call(rendererId
                 , "loadMedia"
-                , [serverId, mediaID])
+                , [serverId, mediaId]
+                , function (res) {
+                    ctrl.context.loadedMedia = mediaId;
+                });
         };
 
         ctrl.play = function (rendererId){
@@ -119,13 +82,12 @@ module.exports = function(app,utils) {
                 , "Play"
                 , []
                 , function (str) {
-                    console.log(str);
                     console.log("play");
                 });
         };
 
         ctrl.setRenderer = function (rendererId){
-            ctrl.rendererId = rendererId;
+            ctrl.context.rendererId = rendererId;
         };
 
 

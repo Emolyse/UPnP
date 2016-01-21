@@ -4,19 +4,36 @@ module.exports = function(app,utils) {
             restrict:'E'
             ,templateUrl:'templates/player.html'
             ,scope:{
-                brick:"=brick"
-                ,media:"=media"
-                ,title:"=title"
+                renderer:"=renderer"
             }//Chaine passée directement
-            ,controllerAs:"mr"
-            ,controller:function ($scope,$location,$http) {
-                var ctrl = this;
-                ctrl.brick = $scope.brick;
-                ctrl.media = $scope.media;
-                ctrl.breadCrumb = [$scope.title];
-                ctrl.loadMedia = function(brick) {
-                    console.log(brick);
-                }
+            ,controllerAs:"pc"
+            ,controller:function ($scope) {
+                var pc = this;
+                pc.Play = function(rendererId) {
+                    utils.call(rendererId
+                        ,'Play'
+                        ,[]
+                        , function(res, rendererId){
+                            console.log(rendererId);
+                            console.log("En cours de lecture");
+                        });
+                };
+
+                pc.Stop = function(rendererId) {
+                    utils.call(rendererId
+                        ,'Stop'
+                        ,[]
+                        , function(res){
+                        });
+                };
+
+                pc.Pause = function(rendererId) {
+                    utils.call(rendererId
+                        ,'Pause'
+                        ,[]
+                        , function(res){
+                        });
+                };
             }
         }
     });

@@ -1,0 +1,16 @@
+<p>MON</p>
+<span ng-bind="renderer"></span>
+    <!-- Commands here -->
+    <md-button ng-click="pc.Play(renderer)">
+        Play
+    </md-button>
+    <md-button ng-click="pc.Pause(renderer)">
+        Pause
+    </md-button>
+    <md-button class="stop" ng-click="pc.Stop(renderer)" >
+        Stop
+    </md-button>
+    <md-slider	ng-model="pc.volume"
+                  ng-mouseup="pc.changeVolume(pc.volume)"
+                  min="0" max="100" aria-label="volume">
+    </md-slider>
