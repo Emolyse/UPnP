@@ -17,38 +17,18 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body ng-controller="sc as ctrl">
-<md-content>
-    <md-content>
-        <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-dynamic-height>
-            <section ng-bind class="brick" ng-repeat="brick in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaServer'}">
-                <md-tab ng-click="ctrl.Browse(brick.id,0)">
-                    <md-tab-label>{{brick.name}}</md-tab-label>
-                    <md-tab-body>
-                        <player
-                            renderer="ctrl.context.rendererId"
-                        </player>
-                        <media-explorer
-                        brick="brick"
-                        title="{{brick.name}}"
-                        context="ctrl.context">
-                        </media-explorer>
-                        {{ctrl.context.loadedMedia}}<br>
-                        {{ctrl.context.rendererId}}
-                        <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
-                            <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
-                            <media-renderer
-                                 title="renderer.name"
-                                       brick="brick"
-                                    media="ctrl.context.medias">
-                            </media-renderer>
-                        </section>
-                    </md-tab-body>
-                </md-tab>
-            </section>
-        </md-tabs>
-    </md-content>
-
-    <!--Pour plus tard: pour gérer les palettes de couleurs on peut récupérer un template déjà prêt-->
+<server-explorer
+        context="ctrl.context"
+        firstbrick="ctrl.firstbrick"
+></server-explorer>
+<section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
+    <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+    <media-renderer
+            title="renderer.name"
+            brick="brick"
+            media="ctrl.context.medias"/>
+</section>
+<player renderer="ctrl.context.rendererId"/>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>

@@ -7,18 +7,25 @@ module.exports = function(app,utils) {
                 brick:"=brick"
                 ,context:"=context"
                 ,title:"@title"}//Chaine passée directement
-            ,controllerAs:"mc"
+            ,controllerAs:"mec"
             ,controller:function ($scope) {
                 var ctrl = this;
                 //ctrl.idBrick = $scope.idBrick;
-                ctrl.breadCrumb = [{
-                    title : $scope.title,
-                    dirId : 0
-                }];
-                $scope.$watch("directories",function(){
+                ctrl.breadCrumb={
+                    0: {
+                        titre : $scope.title
+                    }
+                };
+                $scope.$watch("context.explorer.directories",function(){
                     var dirId = 0;
-                    var dir = $scope.context.directories;
-
+                    //var dir = $scope.context.directories;
+                    console.log('Les bananas');
+                    //if(dir.l){
+                    //    dir = $scope.context.directories[0];
+                    //    if(dir.id==0){
+                    //
+                    //    }
+                    //}
                 });
                 ctrl.Browse = function(dirId){
                     $scope.context.explorer = utils.Browse($scope.brick.id,dirId);

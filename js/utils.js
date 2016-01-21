@@ -95,6 +95,39 @@ var utils = {
 
 				}
 			}
+	, Browse : function (brickId,dirId) {
+			if(!dirId)
+				dirId = 0;
+			var explorer = {medias: [], directories: []};
+			utils.call(brickId
+					, "Browse"
+					, [dirId]
+					, function (str) {
+						var parser = new DOMParser();
+						var doc = parser.parseFromString(str, "text/xml");
+						var Result = doc.querySelector('Result');
+						if(Result) {
+							var ResultDoc = parser.parseFromString(Result.textContent, "text/xml");
+							var L_containers = ResultDoc.querySelectorAll('container'), i, title, icon;
+							for(i=0; i<L_containers.length; i++) {
+								var container	= L_containers.item(i);
+								title	= container.querySelector('title').textContent; //container.getElementsByTagName('title').item(0).textContent;
+								icon	= container.querySelector('albumArtURI'); icon = icon?icon.textContent:"./img/folder.jpg";
+								explorer.directories.push( {serverId: brickId, name: title, iconURL: icon, id: container.getAttribute("id")} );
+								console.log(explorer.directories.length+" directory-ies found");
+							}
+							var L_items	= ResultDoc.querySelectorAll('item');
+							for(i=0; i<L_items.length; i++) {
+								var item	= L_items.item(i);
+								title	= item.querySelector('title').textContent; //item.getElementsByTagName('title').item(0).textContent;
+								icon	= item.querySelector('albumArtURI'); icon = icon?icon.textContent:"./images/icons/media_icon.jpg";
+								explorer.medias.push( {serverId: brickId, name: title, iconURL: icon, id: item.getAttribute("id")} );
+								console.log(explorer.medias.length+" media(s) found");
+							}
+						}
+					});
+			return explorer;
+		}
 };
 
 module.exports = utils;

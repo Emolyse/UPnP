@@ -1,0 +1,16 @@
+<md-content>
+    <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-dynamic-height>
+        <section ng-bind class="brick" ng-repeat="brick in context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaServer'}">
+            <md-tab ng-click="sec.Browse(brick.id,0)">
+                <md-tab-label>{{brick.name}}</md-tab-label>
+                <md-tab-body>
+                    <media-explorer
+                            brick="brick"
+                            title="{{brick.name}}"
+                            context="context">
+                    </media-explorer>
+                </md-tab-body>
+            </md-tab>
+        </section>
+    </md-tabs>
+</md-content>
