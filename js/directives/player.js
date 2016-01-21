@@ -9,12 +9,17 @@ module.exports = function(app,utils) {
             ,controllerAs:"pc"
             ,controller:function ($scope) {
                 var pc = this;
+                pc.volume = 0;
+
+                $scope.$watch('pc.volume', function() {
+                    pc.SetVolume(pc.volume);
+                });
+
                 pc.Play = function(rendererId) {
                     utils.call(rendererId
                         ,'Play'
                         ,[]
-                        , function(res, rendererId){
-                            console.log(rendererId);
+                        , function(res){
                             console.log("En cours de lecture");
                         });
                 };
@@ -31,6 +36,14 @@ module.exports = function(app,utils) {
                     utils.call(rendererId
                         ,'Pause'
                         ,[]
+                        , function(res){
+                        });
+                };
+
+                pc.SetVolume = function(volume) {
+                    utils.call($scope.renderer
+                        ,'setVolume'
+                        ,[volume]
                         , function(res){
                         });
                 };

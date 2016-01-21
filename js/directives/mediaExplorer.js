@@ -17,7 +17,7 @@ module.exports = function(app,utils) {
                     }
                 };
                 $scope.$watch("context.explorer.directories",function(){
-                    var dirId = 0;
+                    //var dirId = 0;
                     //var dir = $scope.context.directories;
                     console.log('Les bananas');
                     //if(dir.l){
