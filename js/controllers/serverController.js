@@ -1,28 +1,33 @@
 module.exports = function(app,utils) {
     app.controller("sc", ['$scope','$location', '$http',function ($scope,$location,$http) {
         var ctrl = this;
+        ctrl.firstbrick = {};
         $http.get("/getContext").success(function (data) {
             //ctrl.context = data;
             ctrl.context = {bricks:{}};
+            var init = true;
             for(var i in data.bricks){
                 ctrl.context.bricks[data.bricks[i].id]=data.bricks[i];
+                if(init){
+                    ctrl.firstbrick = data.bricks[i];
+                    init = false;
+                }
             }
 
-            utils.io.on("brickAppears", function (data) {
+            ctrl.func = utils.io.on("brickAppears", function (data) {
                 ctrl.context.bricks[data.id] = data;
-                $scope.$apply();
             });
 
             utils.io.on("brickDisappears", function (data) {
-                delete ctrl.context.bricks[data.brickID];
+                delete ctrl.context.bricks[data.id];
             });
 
             ctrl.context.explorer = [];
             ctrl.context.directories= [];
             ctrl.context.medias = [];
             ctrl.rendererId = '-1';
+            ctrl.browses(ctrl.firstbrick, 0);
         });
-        //ctrl.browses(ctrl.context.bricks, 0);
 
         /**
          * @name Browse
