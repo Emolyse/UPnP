@@ -25,8 +25,8 @@
                     <md-tab-label>{{brick.name}}</md-tab-label>
                     <md-tab-body>
                         <section class="md-padding">
-                            <section class="flex" layout="row">
-                                <div class="flex" ng-repeat="dir in ctrl.context.directories">
+                            <section class="flex directories" layout="row">
+                                <div class="flex directory" ng-repeat="dir in ctrl.context.directories">
                                     <h2>{{dir.name}}</h2>
                                     <img ng-src="{{dir.iconURL}}" ng-click="ctrl.browses(brick, dir.directory)">
                                 </div>
@@ -39,6 +39,31 @@
                                     <button ng-click="ctrl.play(ctrl.rendererId)">PLAY</button>
                                 </div>
                             </section>
+
+                           <!-- <md-content>
+                                <md-list>
+                                    <md-list-item class="md-3-line" ng-repeat="media in ctrl.context.medias">
+                                        <img ng-src="{{media.iconURL}}" ng-click="ctrl.browses(brick, dir.directory)">
+                                        <div class="md-list-item-text">
+                                            <h2>{{media.name}}</h2>
+
+                                            <md-button class="md-fab" aria-label="Eat cake" ng-click="ctrl.loadMedias(media.serverId, ctrl.rendererId, media.mediaId)">
+                                                <md-icon md-svg-src="img/refresh.svg"></md-icon>
+                                            </md-button>
+
+                                            <md-button class="md-fab" aria-label="Eat cake" ng-click="ctrl.play(ctrl.rendererId)">
+                                                <md-icon md-svg-src="img/play.svg"></md-icon>
+                                            </md-button>
+
+                                            <button ng-click="ctrl.loadMedias(media.serverId, ctrl.rendererId, media.mediaId)">LOAD</button>
+                                            <button ng-click="ctrl.play(ctrl.rendererId)">PLAY</button>
+                                        </div>
+                                        <md-divider md-inset ng-if="!$last"></md-divider>
+                                    </md-list-item>
+                                </md-list>
+                            </md-content>-->
+
+
                             <!--<media-explorer-->
                             <!--title="{{brick.name}}"-->
                             <!--brick="brick"-->
@@ -46,13 +71,25 @@
                             <!--</media-explorer>-->
                         </section>
 
-                        <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
-                            <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+                        <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}" class="rendererRepeat">
+                            <md-card>
+                                <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+                                <md-card-content>
+                                    <media-renderer
+                                            title="{{renderer.name}}"
+                                            brick="brick"
+                                            media="ctrl.context.medias">
+                                    </media-renderer>
+                                    <p>{{renderer.name}}</p>
+                                </md-card-content>
+                            </md-card>
+
+                            <!--<img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
                             <media-renderer
                                  title="{{renderer.name}}"
                                        brick="brick"
                                     media="ctrl.context.medias">
-                            </media-renderer>
+                            </media-renderer>-->
                         </section>
                     </md-tab-body>
                 </md-tab>
