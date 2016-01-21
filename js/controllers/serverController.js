@@ -5,9 +5,9 @@ module.exports = function(app,utils) {
         ctrl.firstbrick = {};
         $http.get("/getContext").success(function (data) {
             var init = true;
-            for(var i in data.bricks){
-                ctrl.context.bricks[data.bricks[i].id]=data.bricks[i];
-                if(init){
+            for(var i in data.bricks) {
+                ctrl.context.bricks[data.bricks[i].id] = data.bricks[i];
+                if(init &&  ctrl.context.bricks[i].type[2] === "BrickUPnP_MediaServer"){
                     ctrl.firstbrick = data.bricks[i];
                     init = false;
                 }
@@ -23,7 +23,7 @@ module.exports = function(app,utils) {
 
             ctrl.context.directories= [];
             ctrl.context.medias = [];
-            ctrl.rendererId = '-1';
+            ctrl.context.rendererId = '-1';
             ctrl.Browse(ctrl.context,ctrl.firstbrick.id, 0);
         });
 
@@ -39,9 +39,9 @@ module.exports = function(app,utils) {
                     var doc = parser.parseFromString(str, "text/xml");
                     console.log("Params",brickId,dirId);
                     var Result = doc.querySelector('Result');
+                    console.log(str);
                     if(Result) {
                         var ResultDoc = parser.parseFromString(Result.textContent, "text/xml");
-                        console.log("ResultDoc",ResultDoc);
                         var L_containers = ResultDoc.querySelectorAll('container'), i, title, icon;
                         for(i=0; i<L_containers.length; i++) {
                             var container	= L_containers.item(i);
@@ -65,10 +65,13 @@ module.exports = function(app,utils) {
             ctrl.context.explorer = utils.Browse(brickId,dirId);
         };
 
-        ctrl.loadMedias = function (serverId, rendererId, mediaID){
+        ctrl.loadMedias = function (serverId, rendererId, mediaId){
             utils.call(rendererId
                 , "loadMedia"
-                , [serverId, mediaID])
+                , [serverId, mediaId]
+                , function (res) {
+                    ctrl.context.loadedMedia = mediaId;
+                });
         };
 
         ctrl.play = function (rendererId){
@@ -76,13 +79,12 @@ module.exports = function(app,utils) {
                 , "Play"
                 , []
                 , function (str) {
-                    console.log(str);
                     console.log("play");
                 });
         };
 
         ctrl.setRenderer = function (rendererId){
-            ctrl.rendererId = rendererId;
+            ctrl.context.rendererId = rendererId;
         };
 
 

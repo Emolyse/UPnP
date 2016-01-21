@@ -7,3 +7,31 @@ md-tabs.md-default-theme.md-accent, md-tabs.md-accent > md-tabs-wrapper{
 md-tabs.md-default-theme.md-accent, md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]){
     color: #BDBDBD;
 }
+.rendererRepeat{
+    display: flex;
+    flex-wrap: wrap;
+}
+md-card {
+    max-width: 200px;
+    min-width: 150px;
+}
+md-card md-card-content {
+    padding: 0px 16px;
+}
+.directories{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+.directory{
+    min-width: 195px;
+    text-align: center;
+}
+.directory h2{
+
+}
+.directory img{
+    min-width: 130px;
+    max-width: 170px;
+}

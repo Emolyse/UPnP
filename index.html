@@ -24,18 +24,22 @@
                 <md-tab ng-click="ctrl.Browse(brick.id,0)">
                     <md-tab-label>{{brick.name}}</md-tab-label>
                     <md-tab-body>
-                        <section>
-                            <media-explorer
-                            brick="brick"
-                            title="{{brick.name}}"
-                            context="ctrl.context">
-                            </media-explorer>
-                        </section>
+                        <section class="md-padding">
 
+                        <player
+                            renderer="ctrl.context.rendererId"
+                        </player>
+                        <media-explorer
+                        brick="brick"
+                        title="{{brick.name}}"
+                        context="ctrl.context">
+                        </media-explorer>
+                        {{ctrl.context.loadedMedia}}<br>
+                        {{ctrl.context.rendererId}}
                         <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
                             <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
                             <media-renderer
-                                 title="{{renderer.name}}"
+                                 title="renderer.name"
                                        brick="brick"
                                     media="ctrl.context.medias">
                             </media-renderer>
