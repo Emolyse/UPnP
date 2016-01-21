@@ -4,51 +4,32 @@ module.exports = function(app,utils) {
             restrict:'E'
             ,templateUrl:'templates/media-explorer.html'
             ,scope:{
-                brick:"=brick"//
-                ,explorer:"=explorer"
+                brick:"=brick"
+                ,context:"=context"
                 ,title:"@title"}//Chaine passée directement
-            ,controllerAs:"mc"
-            ,controller:function ($scope,$location,$http) {
+            ,controllerAs:"mec"
+            ,controller:function ($scope) {
                 var ctrl = this;
-                ctrl.breadCrumb = [$scope.title];
-                ctrl.brick = $scope.brick;
-                ctrl.explorer = $scope.explorer;
-                ctrl.Browse = function (brick,dirId) {
-                    console.log("bananas");
-                    if(!dirId)
-                        dirId = 0;
-                    utils.call(brick.id
-                        , "Browse"
-                        , [dirId]
-                        , function (str) {
-                            var parser = new DOMParser();
-                            ctrl.explorer.splice(0,ctrl.explorer.length);
-                            var doc = parser.parseFromString(str, "text/xml");
-                            var res = doc.querySelector("Result");
-                            var content = parser.parseFromString(res.textContent, "text/xml");
-                            var containers = content.querySelectorAll("container");
-                            console.log(containers);
-                            for(var i=0;i<containers.length;i++){
-                                var dir = {};
-                                var attr = containers[i].attributes;
-                                if(attr)
-                                    for(var j=0;j<attr.length;j++){
-                                        dir[attr[j].name]=attr[j].value;
-                                    }
-                                var children = containers[i].children;
-                                if(children)
-                                    for(var j=0;j<children.length;j++){
-                                        var name = children[j].tagName+"";
-                                        name = name.split(':');
-                                        name = name[name.length-1];
-                                        dir[name]=children[i].textContent;
-                                    }
-                                ctrl.explorer.push(dir);
-                            }
-                            $scope.$apply();
-                            console.log(ctrl.explorer);
-                        });
-                }
+                //ctrl.idBrick = $scope.idBrick;
+                ctrl.breadCrumb={
+                    0: {
+                        titre : $scope.title
+                    }
+                };
+                $scope.$watch("context.explorer.directories",function(){
+                    //var dirId = 0;
+                    //var dir = $scope.context.directories;
+                    console.log('Les bananas');
+                    //if(dir.l){
+                    //    dir = $scope.context.directories[0];
+                    //    if(dir.id==0){
+                    //
+                    //    }
+                    //}
+                });
+                ctrl.Browse = function(dirId){
+                    $scope.context.explorer = utils.Browse($scope.brick.id,dirId);
+                };
             }
         }
     });

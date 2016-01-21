@@ -1,23 +1,13 @@
-<!--<span ng-bind="renderer"></span>-->
-<div layout="row">
-    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Play(renderer)">
-        <md-icon md-svg-src="img/play.svg"></md-icon>
+<section>
+    <md-button ng-click="pc.Play(renderer)">
+        Play
     </md-button>
-    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Pause(renderer)">
-        <md-icon md-svg-src="img/pause.svg"></md-icon>
+    <md-button ng-click="pc.Pause(renderer)">
+        Pause
     </md-button>
-    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Stop(renderer)">
-        <md-icon md-svg-src="img/stop.svg"></md-icon>
+    <md-button class="stop" ng-click="pc.Stop(renderer)">
+        Stop
     </md-button>
-
-    <div layout="row" layout-align="center center" class="volume">
-        <md-icon md-mini md-svg-src="img/vol_down.svg"></md-icon>
-        <md-slider	ng-model="pc.volume"
-                      ng-mouseup="pc.changeVolume(pc.volume)"
-                      min="0" max="100" aria-label="volume">
-        </md-slider>
-        <md-icon md-mini md-svg-src="img/vol_up.svg"></md-icon>
-    </div>
-</div>
-
-
+    <md-slider	ng-model="pc.volume" min="0" max="100" aria-label="volume">
+    </md-slider>
+</section>

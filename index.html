@@ -10,69 +10,25 @@
         }
         .brick > img{
             height: 50px;
-            vertical-align: center;
+            vertical-align: middle;
         }
     </style>
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body ng-controller="sc as ctrl">
-<md-content>
-    <md-content>
-        <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-dynamic-height>
-            <section ng-bind class="brick" ng-repeat="brick in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaServer'}">
-                <md-tab ng-click="ctrl.browses(brick,0)">
-                    <md-tab-label>{{brick.name}}</md-tab-label>
-                    <md-tab-body>
-                        <section class="md-padding">
-                            <section class="flex" layout="row">
-                                <div class="flex" ng-repeat="dir in ctrl.context.directories">
-                                    <h2>{{dir.name}}</h2>
-                                    <img ng-src="{{dir.iconURL}}" ng-click="ctrl.browses(brick, dir.directory)">
-                                </div>
-                            </section>
-                            <section class="flex" layout="row">
-                                <div class="flex" ng-repeat="media in ctrl.context.medias">
-                                    <h2>{{media.name}}</h2>
-                                    <img ng-src="{{media.iconURL}}" ng-click="ctrl.loadMedias(media.serverId, ctrl.context.rendererId, media.mediaId)">
-                                    <md-button class="md-mini md-fab" aria-label="Eat cake" ng-click="ctrl.loadMedias(media.serverId, ctrl.context.rendererId, media.mediaId)">
-                                        <md-icon md-svg-src="img/refresh.svg"></md-icon>
-                                    </md-button>
-                                    <!--<button ng-click="ctrl.loadMedias(media.serverId, ctrl.context.rendererId, media.mediaId)">LOAD</button>-->
-                                </div>
-                            </section>
-                            <!--<media-explorer-->
-                            <!--title="{{brick.name}}"-->
-                            <!--brick="brick"-->
-                            <!--explorer="ctrl.context.explorer">-->
-                            <!--</media-explorer>-->
-                        </section>
-                        {{ctrl.context.loadedMedia}}<br>
-                        {{ctrl.context.rendererId}}
-
-
-
-                    </md-tab-body>
-                </md-tab>
-            </section>
-        </md-tabs>
-    </md-content>
-    <!-- MEDIA PLAYER -->
-    <section layout="row" layout-align="space-between center" class="player">
-        <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}" class="rendererIcon">
-            <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
-            <media-renderer
-                    title="renderer.name"
-                    brick="brick"
-                    media="ctrl.context.medias">
-            </media-renderer>
-        </section>
-        <player
-                renderer="ctrl.context.rendererId">
-        </player>
-        <div class="nomLecture">Nom du fichier en cours de lecture</div>
-    </section>
-    <!--Pour plus tard: pour gérer les palettes de couleurs on peut récupérer un template déjà prêt-->
+<server-explorer
+        context="ctrl.context"
+        firstbrick="ctrl.firstbrick"
+></server-explorer>
+<section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
+    <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+    <media-renderer
+            title="renderer.name"
+            brick="brick"
+            media="ctrl.context.medias"/>
+</section>
+<player renderer="ctrl.context.rendererId"/>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
