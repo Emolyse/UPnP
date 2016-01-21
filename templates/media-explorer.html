@@ -1,10 +1,9 @@
 <style type="text/css"></style>
-<h2>{{title}}</h2>
-
-<p class="breadCrumb"><label ng-repeat="ad in mc.breadCrumb"></label></p>
+<p class="breadCrumb">
+    <label ng-repeat="ad in mc.breadCrumb" ng-click="mc.Browse(ad.dirId)">| {{ad.title}}</label>
+</p>
 <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
-      <!--<md-card ng-repeat="server in mc.explorer|toArray:false|filter:{type:'BrickUPnP_MediaServer'}">-->
-      <md-card ng-repeat="dir in mc.explorer"  ng-click="mc.Browse(brick,dir.id)">
-        {{dir.title}}
+      <md-card ng-repeat="dir in context.explorer.directories"  ng-click="mc.Browse(dir.id)">
+        {{dir.name}}
       </md-card>
 </md-content>
