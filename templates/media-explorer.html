@@ -1,9 +1,9 @@
 <style type="text/css"></style>
 <p class="breadCrumb">
-    <label ng-repeat="ad in mec.breadCrumb" ng-click="mc.Browse(ad.dirId)">| {{ad.title}}</label>
+    <label ng-repeat="ad in mec.breadCrumb" ng-click="mec.Browse(ad.id)"> | {{ad.title}}</label>
 </p>
 <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
-      <md-card ng-repeat="dir in context.explorer.directories"  ng-click="mec.Browse(dir.id)">
+      <md-card ng-repeat="dir in context.explorer.directories"  ng-click="mec.Browse(dir)">
         {{dir.name}}
       </md-card>
 </md-content>

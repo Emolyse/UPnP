@@ -12,15 +12,13 @@ module.exports = function(app,utils) {
                 console.log($scope.context);
                 var ctrl = this;
                 ctrl.Browse = function(brickId,dirId){
-                    console.log("server controller",brickId,dirId);
                     $scope.context.explorer = utils.Browse(brickId,dirId);
                 };
                 var firstwatcher = $scope.$watch("firstbrick", function () {
-                    console.log('Watcher first brick',$scope.firstbrick);
                     if($scope.firstbrick){
                         if($scope.firstbrick.id){
                             console.log("Browse first brick");
-                            $scope.context.explorer = ctrl.Browse($scope.firstbrick.id,0);
+                            ctrl.Browse($scope.firstbrick.id,0);
                             firstwatcher();
                         }
                     }
