@@ -21,7 +21,7 @@
         context="ctrl.context"
         firstbrick="ctrl.firstbrick"
 ></server-explorer>
-<section layout="row" layout-align="space-between center" class="player">
+<section layout="row" layout-align="space-between center" class="player" layout-sm="column">
     <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}" class="rendererIcon">
         <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
         <media-renderer
