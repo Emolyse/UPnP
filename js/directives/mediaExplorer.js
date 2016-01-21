@@ -27,6 +27,7 @@ module.exports = function(app,utils) {
                             var res = doc.querySelector("Result");
                             var content = parser.parseFromString(res.textContent, "text/xml");
                             var containers = content.querySelectorAll("container");
+                            console.log(containers);
                             for(var i=0;i<containers.length;i++){
                                 var dir = {};
                                 var attr = containers[i].attributes;
@@ -51,4 +52,4 @@ module.exports = function(app,utils) {
             }
         }
     });
-}
+};

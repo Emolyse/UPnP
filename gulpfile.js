@@ -63,7 +63,7 @@ gulp.task("webpack", function(callback) {
 			},
 			output	: {
 				path			: "./",
-				filename		: "[name].js",
+				filename		: "[name].js"
 			},
 			progress: false,
 			stats: {

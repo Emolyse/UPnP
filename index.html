@@ -20,16 +20,39 @@
 <md-content>
     <md-content>
         <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-dynamic-height>
-            <section class="brick" ng-repeat="brick in ctrl.context.bricks">
-                <md-tab>
+            <section class="brick" ng-repeat="brick in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaServer'}">
+                <md-tab ng-click="ctrl.browses(brick,0)">
                     <md-tab-label>{{brick.name}}</md-tab-label>
                     <md-tab-body>
                         <section class="md-padding">
-                            <img ng-src="{{brick.iconURL}}" ng-click="ctrl.Browse(brick)">
-                            <media-explorer
-                            title="{{brick.name}}"
-                            brick="brick"
-                            explorer="ctrl.context.explorer"></media-explorer>
+                            <section class="flex" layout="row">
+                                <div class="flex" ng-repeat="dir in ctrl.context.directories">
+                                    <h2>{{dir.name}}</h2>
+                                    <img ng-src="{{dir.iconURL}}" ng-click="ctrl.browses(brick, dir.directory)">
+                                </div>
+                            </section>
+                            <section class="flex" layout="column">
+                                <div class="flex" ng-repeat="media in ctrl.context.medias">
+                                    <h2>{{media.name}}</h2>
+                                    <img ng-src="{{media.iconURL}}" ng-click="ctrl.browses(brick, dir.directory)">
+                                    <button ng-click="ctrl.loadMedias(media.serverId, ctrl.rendererId, media.mediaId)">LOAD</button>
+                                    <button ng-click="ctrl.play(ctrl.rendererId)">PLAY</button>
+                                </div>
+                            </section>
+                            <!--<media-explorer-->
+                            <!--title="{{brick.name}}"-->
+                            <!--brick="brick"-->
+                            <!--explorer="ctrl.context.explorer">-->
+                            <!--</media-explorer>-->
+                        </section>
+
+                        <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
+                            <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+                            <media-renderer
+                                 title="{{renderer.name}}"
+                                       brick="brick"
+                                    media="ctrl.context.medias">
+                            </media-renderer>
                         </section>
                     </md-tab-body>
                 </md-tab>
