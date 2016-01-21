@@ -3,6 +3,16 @@
 <head>
     <title>UPnP</title>
     <meta charset="utf-8"/>
+    <style>
+        .brick{
+            display: flex;
+            flex-flow: row nowrap;
+        }
+        .brick > img{
+            height: 50px;
+            vertical-align: middle;
+        }
+    </style>
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -11,13 +21,19 @@
         context="ctrl.context"
         firstbrick="ctrl.firstbrick"
 ></server-explorer>
-<section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
-    <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
-    <media-renderer
-            title="renderer.name"
-            brick="brick"
-            media="ctrl.context.medias"
-    ></media-renderer>
+<section layout="row" layout-align="space-between center" class="player" layout-sm="column">
+    <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}" class="rendererIcon">
+        <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+        <media-renderer
+                title="renderer.name"
+                brick="brick"
+                media="ctrl.context.medias">
+        </media-renderer>
+    </section>
+    <player
+            renderer="ctrl.context.rendererId">
+    </player>
+    <div class="nomLecture">Nom du fichier en cours de lecture</div>
 </section>
 <player renderer="ctrl.context.rendererId"/>
 
