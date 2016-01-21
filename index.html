@@ -21,14 +21,20 @@
         context="ctrl.context"
         firstbrick="ctrl.firstbrick"
 ></server-explorer>
-<section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}">
-    <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
-    <media-renderer
-            title="renderer.name"
-            brick="brick"
-            media="ctrl.context.medias"/>
+<section layout="row" layout-align="space-between center" class="player">
+    <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}" class="rendererIcon">
+        <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+        <media-renderer
+                title="renderer.name"
+                brick="brick"
+                media="ctrl.context.medias">
+        </media-renderer>
+    </section>
+    <player
+            renderer="ctrl.context.rendererId">
+    </player>
+    <div class="nomLecture">Nom du fichier en cours de lecture</div>
 </section>
-<player renderer="ctrl.context.rendererId"/>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
