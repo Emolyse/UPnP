@@ -1,22 +1,19 @@
-<div layout="row">
-    <div layout="row" layout-sm="column">
-        <div layout="row">
-            <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Play(renderer)">
-                <md-icon md-svg-src="img/play.svg"></md-icon>
-            </md-button>
-            <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Pause(renderer)">
-                <md-icon md-svg-src="img/pause.svg"></md-icon>
-            </md-button>
-            <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Stop(renderer)">
-                <md-icon md-svg-src="img/stop.svg"></md-icon>
-            </md-button>
-        </div>
 
-        <div layout="row" layout-align="center center" class="volume">
-            <md-icon md-mini md-svg-src="img/vol_down.svg"></md-icon>
-            <md-slider	ng-model="pc.volume" min="0" max="100" aria-label="volume">
-            </md-slider>
-            <md-icon md-mini md-svg-src="img/vol_up.svg"></md-icon>
-        </div>
+<div layout="row">
+    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Play(context.rendererId)">
+        <md-icon md-svg-src="img/play.svg"></md-icon>
+    </md-button>
+    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Pause(context.rendererId)">
+        <md-icon md-svg-src="img/pause.svg"></md-icon>
+    </md-button>
+    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Stop(context.rendererId)">
+        <md-icon md-svg-src="img/stop.svg"></md-icon>
+    </md-button>
+
+    <div layout="row" layout-align="center center" class="volume">
+        <md-icon md-mini md-svg-src="img/vol_down.svg"></md-icon>
+        <md-slider	ng-model="pc.volume" min="0" max="100" aria-label="volume">
+        </md-slider>
+        <md-icon md-mini md-svg-src="img/vol_up.svg"></md-icon>
     </div>
 </div>

@@ -3,6 +3,8 @@ module.exports = function(app,utils) {
         var ctrl = this;
         ctrl.context = {bricks:{}};
         ctrl.firstbrick = {};
+        ctrl.context.loadedMedia = '1';
+        ctrl.context.rendererId = '-1';
         $http.get("/getContext").success(function (data) {
             var init = true;
             for(var i in data.bricks) {
@@ -25,32 +27,12 @@ module.exports = function(app,utils) {
 
             ctrl.context.directories= [];
             ctrl.context.medias = [];
-            ctrl.context.rendererId = '-1';
 
         });
-
-        ctrl.loadMedias = function (serverId, rendererId, mediaId){
-            utils.call(rendererId
-                , "loadMedia"
-                , [serverId, mediaId]
-                , function (res) {
-                    ctrl.context.loadedMedia = mediaId;
-                });
-        };
-
-        ctrl.play = function (rendererId){
-            utils.call(rendererId
-                , "Play"
-                , []
-                , function (str) {
-                    console.log("play");
-                });
-        };
 
         ctrl.setRenderer = function (rendererId){
             ctrl.context.rendererId = rendererId;
         };
-
 
         /**********************************************
          *              Mise en forme                 *

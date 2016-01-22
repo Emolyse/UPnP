@@ -113,17 +113,17 @@ var utils = {
 								var container	= L_containers.item(i);
 								title	= container.querySelector('title').textContent; //container.getElementsByTagName('title').item(0).textContent;
 								icon	= container.querySelector('albumArtURI'); icon = icon?icon.textContent:"./img/folder.jpg";
-								explorer.directories.push( {serverId: brickId, name: title, iconURL: icon, id: container.getAttribute("id")} );
-								console.log(explorer.directories.length+" directory-ies found");
+								explorer.directories.push( {serverId: brickId, name: title, iconURL: icon, id: container.getAttribute("id"),parentID: container.getAttribute("parentID")} );
 							}
+                            //console.log(explorer.directories.length, "dirs found");
 							var L_items	= ResultDoc.querySelectorAll('item');
 							for(i=0; i<L_items.length; i++) {
 								var item	= L_items.item(i);
 								title	= item.querySelector('title').textContent; //item.getElementsByTagName('title').item(0).textContent;
 								icon	= item.querySelector('albumArtURI'); icon = icon?icon.textContent:"./images/icons/media_icon.jpg";
 								explorer.medias.push( {serverId: brickId, name: title, iconURL: icon, id: item.getAttribute("id")} );
-								console.log(explorer.medias.length+" media(s) found");
 							}
+                            //console.log(explorer.medias.length, "medias found");
 						}
 					});
 			return explorer;
