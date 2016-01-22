@@ -115,7 +115,7 @@ var utils = {
                         icon	= container.querySelector('albumArtURI'); icon = icon?icon.textContent:"./img/folder.jpg";
                         explorer.directories.push( {serverId: brickId, name: title, iconURL: icon, id: container.getAttribute("id"),parentID: container.getAttribute("parentID")} );
                     }
-                    //console.log(explorer.directories.length, "dirs found");
+                    console.log(explorer.directories.length, "dirs found");
                     var L_items	= ResultDoc.querySelectorAll('item');
                     for(i=0; i<L_items.length; i++) {
                         var item	= L_items.item(i);

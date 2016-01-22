@@ -10,8 +10,9 @@ var app = angular.module("UPnP",['ngMaterial','ui.router','angular-toArrayFilter
     });
 
 require( "./controllers/serverController.js" )(app,utils);
-require( "./directives/mediaExplorer.js" )(app,utils);
-require( "./directives/player.js" )(app,utils);
-require( "./directives/directory.js" )(app,utils);
 require( "./directives/serverExplorer.js" )(app,utils);
+require( "./directives/mediaExplorer.js" )(app,utils);
+require( "./directives/directory.js" )(app,utils);
 require( "./directives/media.js" )(app,utils);
+require( "./directives/player.js" )(app,utils);
+require( "./directives/mediaRenderer.js" )(app,utils);

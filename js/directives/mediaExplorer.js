@@ -23,6 +23,8 @@ module.exports = function(app,utils) {
                 //On gère le file de navigation ici
                 $scope.$watch("context.explorer.directories",function(){
                     var dirs = $scope.context.directories;
+                    console.log("##############"+$scope.brick.name+"#############");
+                    console.log("Current",ctrl.currentDir,dirs);
                     var dirId = 0;
                     if(dirs.length>0){
                         var dir = $scope.context.directories[0];
@@ -31,17 +33,27 @@ module.exports = function(app,utils) {
                             //On réccupère le parent (c'est lui qui nous intéresse)
                             if(ctrl.currentDir == dir.parentID)//On a pas bougé
                                 return;
+                            console.log("Current devient", ctrl.currentDir, dir.parentID);
                             ctrl.currentDir = dir.parentID;
                             dirId = dir.parentID;
+                        } else {
+                            dirId = 0;
+                            ctrl.currentDir = 0;
                         }
-                    } else dirId = ctrl.currentDir;
+
+                    } else {
+                        dirId = ctrl.currentDir;
+                        console.log("on garde le current");
+                    }
                     var directory = ctrl.fileTree[dirId];
                     ctrl.breadCrumb = [{id:directory.id,title:directory.title}];
                     ctrl.iter = 0;
-                    while ( directory.parentID != null && ctrl.iter<10) {
+                    while ( directory.parentID !== undefined && ctrl.iter<10) {
                         directory = ctrl.fileTree[directory.parentID];
                         ctrl.breadCrumb.unshift({id: directory.id, title: directory.title});
                     }
+
+                    console.log("###################################");
                 });
 
                 ctrl.Browse = function(dir){

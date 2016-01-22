@@ -13,6 +13,7 @@ module.exports = function(app,utils) {
                 var ctrl = this;
                 ctrl.Browse = function(brickId,dirId){
                     $scope.context.explorer = utils.Browse(brickId,dirId);
+                    console.log("Server",dirId);
                 };
                 var firstwatcher = $scope.$watch("firstbrick", function () {
                     if($scope.firstbrick){
