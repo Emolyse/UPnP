@@ -21,6 +21,7 @@ module.exports = function(app,utils) {
                 };
 
                 //On gère le file de navigation ici
+
                 $scope.$watchCollection("context.explorer.directories",function(newDirs){
                     //On complète l'arborescence
                     var dir;
@@ -56,7 +57,8 @@ module.exports = function(app,utils) {
                     var directory = ctrl.fileTree[dirId];
                     ctrl.breadCrumb = [{id:directory.id,title:directory.title}];
                     ctrl.iter = 0;
-                    while ( directory.parentID!==undefined && ctrl.iter<10) {
+
+                    while ( directory.parentID !== undefined && ctrl.iter<10) {
                         directory = ctrl.fileTree[directory.parentID];
                         ctrl.breadCrumb.unshift({id: directory.id, title: directory.title});
                     }

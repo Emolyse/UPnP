@@ -14,6 +14,7 @@ module.exports = function(app,utils) {
                 ctrl.Browse = function(brickId,dirId){
                     console.log("Server", dirId);
                     $scope.context.explorer = utils.Browse(brickId,dirId);
+                    console.log("Server",dirId);
                 };
                 var firstwatcher = $scope.$watch("firstbrick", function () {
                     if($scope.firstbrick){
