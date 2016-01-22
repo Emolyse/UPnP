@@ -15,14 +15,20 @@ module.exports = function(app,utils) {
                 }
             }
 
-            ctrl.func = utils.io.on("brickAppears", function (data) {
+            utils.io.on("brickAppears", function (data) {
                 console.log('brickAppears');
-                ctrl.context.bricks[data.id] = data;
+                $scope.$applyAsync(function () {
+                    if (!ctrl.context.bricks[data.id]) {
+                        ctrl.context.bricks[data.id] = data;
+                    }
+                });
             });
 
             utils.io.on("brickDisappears", function (data) {
-                console.log('brickDisappears');
-                delete ctrl.context.bricks[data.id];
+                $scope.$applyAsync(function () {
+                    console.log('brickDisappears');
+                    delete ctrl.context.bricks[data.brickId];
+                });
             });
 
             ctrl.context.directories= [];

@@ -107,7 +107,9 @@ var utils = {
                 var doc = parser.parseFromString(str, "text/xml");
                 var Result = doc.querySelector('Result');
                 if(Result) {
+                    console.log("Params", brickId,dirId);
                     var ResultDoc = parser.parseFromString(Result.textContent, "text/xml");
+                    //console.log("Result",ResultDoc);
                     var L_containers = ResultDoc.querySelectorAll('container'), i, title, icon;
                     for(i=0; i<L_containers.length; i++) {
                         var container	= L_containers.item(i);
@@ -115,7 +117,7 @@ var utils = {
                         icon	= container.querySelector('albumArtURI'); icon = icon?icon.textContent:"./img/folder.jpg";
                         explorer.directories.push( {serverId: brickId, name: title, iconURL: icon, id: container.getAttribute("id"),parentID: container.getAttribute("parentID")} );
                     }
-                    //console.log(explorer.directories.length, "dirs found");
+                    console.log(explorer.directories.length, "dirs found");
                     var L_items	= ResultDoc.querySelectorAll('item');
                     for(i=0; i<L_items.length; i++) {
                         var item	= L_items.item(i);
@@ -123,7 +125,7 @@ var utils = {
                         icon	= item.querySelector('albumArtURI'); icon = icon?icon.textContent:"./img/media_icon.png";
                         explorer.medias.push( {serverId: brickId, name: title, iconURL: icon, id: item.getAttribute("id")} );
                     }
-                    //console.log(explorer.medias.length, "medias found");
+                    console.log(explorer.medias.length, "medias found");
                 }
             });
         return explorer;
