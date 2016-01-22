@@ -120,7 +120,7 @@ var utils = {
                     for(i=0; i<L_items.length; i++) {
                         var item	= L_items.item(i);
                         title	= item.querySelector('title').textContent; //item.getElementsByTagName('title').item(0).textContent;
-                        icon	= item.querySelector('albumArtURI'); icon = icon?icon.textContent:"./images/icons/media_icon.jpg";
+                        icon	= item.querySelector('albumArtURI'); icon = icon?icon.textContent:"./img/media_icon.png";
                         explorer.medias.push( {serverId: brickId, name: title, iconURL: icon, id: item.getAttribute("id")} );
                     }
                     //console.log(explorer.medias.length, "medias found");
