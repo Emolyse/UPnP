@@ -1,6 +1,14 @@
 body{
     margin: 0;
 }
+.brick{
+    display: flex;
+    flex-flow: row nowrap;
+}
+.brick > img{
+    height: 50px;
+    vertical-align: middle;
+}
 md-content{
     height: 100%;
 }
@@ -41,6 +49,9 @@ md-card md-card-content {
     min-width: 130px;
     max-width: 170px;
 }
+.rendererSeul{
+    margin: 0 3px;
+}
 .player{
     position: absolute;
     width: 100%;
@@ -49,6 +60,9 @@ md-card md-card-content {
     bottom: 0px;
     left: 0;
     background-color: #E0E0E0;
+}
+md-tabs.md-default-theme.md-accent, md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active, md-tabs.md-default-theme.md-accent, md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-focused{
+    color: rgb(255,171,64);
 }
 .player img{
     width: 50px;
@@ -65,4 +79,23 @@ md-slider{
 .rendererIcon{
     margin-left: 5px;
     margin-right: auto;
+}
+md-card-title, md-card{
+    text-align: center;
+}
+img.md-card-image {
+    width: 80%;
+    margin: 0 auto;
+}
+md-card {
+    min-height: 255px;
+}
+
+@media (max-width : 600px){
+    .rendererIcon {
+        margin-right: 0;
+    }
+    .nomLecture {
+        margin-right: 0;
+    }
 }
