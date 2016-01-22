@@ -46,6 +46,7 @@ module.exports = function(app,utils) {
                         , function(res){
                         });
                 };
+                pc.SetVolume(100);
             }
         }
     });
