@@ -1,11 +1,12 @@
+
 <div layout="row">
-    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Play(renderer)">
+    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Play(context.rendererId)">
         <md-icon md-svg-src="img/play.svg"></md-icon>
     </md-button>
-    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Pause(renderer)">
+    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Pause(context.rendererId)">
         <md-icon md-svg-src="img/pause.svg"></md-icon>
     </md-button>
-    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Stop(renderer)">
+    <md-button class="md-fab" aria-label="Eat cake" ng-click="pc.Stop(context.rendererId)">
         <md-icon md-svg-src="img/stop.svg"></md-icon>
     </md-button>
 

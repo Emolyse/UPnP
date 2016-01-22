@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<md-card>
+    <img ng-src="{{media.iconURL}}" class="md-card-image" alt="{{media.name}}">
+    <div class="md-actions" layout="row" layout-align="center center">
+        <md-button ng-click="mc.loadMedias(brick.id,context.rendererId,media.id)">Charger ce Film</md-button>
+    </div>
+</md-card>

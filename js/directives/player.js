@@ -4,13 +4,12 @@ module.exports = function(app,utils) {
             restrict:'E'
             ,templateUrl:'templates/player.html'
             ,scope:{
-                renderer:"=renderer"
+                context:"=context"
             }//Chaine passée directement
             ,controllerAs:"pc"
             ,controller:function ($scope) {
                 var pc = this;
-                pc.volume = 0;
-
+                pc.volume = 100;
                 $scope.$watch('pc.volume', function() {
                     pc.SetVolume(pc.volume);
                 });
@@ -41,7 +40,7 @@ module.exports = function(app,utils) {
                 };
 
                 pc.SetVolume = function(volume) {
-                    utils.call($scope.renderer
+                    utils.call($scope.context.rendererId
                         ,'setVolume'
                         ,[volume]
                         , function(res){
