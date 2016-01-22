@@ -15,9 +15,6 @@ module.exports = function(app,utils) {
                     $scope.context.loadedMedia = mediaId;
                 };
                 ctrl.loadMedias = function (serverId, rendererId, mediaId){
-                    alert(serverId);
-                    alert(rendererId);
-                    alert(mediaId);
                     utils.call(rendererId
                         , "loadMedia"
                         , [serverId, mediaId]
