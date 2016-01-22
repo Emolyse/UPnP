@@ -20,17 +20,18 @@
 <server-explorer
         context="ctrl.context"
         firstbrick="ctrl.firstbrick"
-></server-explorer>
+        ></server-explorer>
 <section layout="row" layout-align="space-between center" class="player" layout-sm="column">
-    <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}" class="rendererIcon">
-        <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
-        <media-renderer
-                title="renderer.name"
-                brick="brick"
-                media="ctrl.context.medias">
-        </media-renderer>
-    </section>
-
+    <div class="rendererIcon" layout="row">
+        <section ng-repeat="renderer in ctrl.context.bricks | toArray:false | filter:{type:'BrickUPnP_MediaRenderer'}" class="rendererSeul">
+            <img ng-src="{{renderer.iconURL}}" ng-click="ctrl.setRenderer(renderer.id)">
+            <media-renderer
+                    title="renderer.name"
+                    brick="brick"
+                    media="ctrl.context.medias">
+            </media-renderer>
+        </section>
+    </div>
     <player context="ctrl.context">
     </player>
     <div class="nomLecture">Nom du fichier en cours de lecture</div>

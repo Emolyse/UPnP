@@ -2,7 +2,7 @@ module.exports = function(app,utils) {
     app.directive("directory",function() {
         return {
             restrict: 'E'
-            , template: '{{dirName}}'
+            , templateUrl: 'templates/directory.html'
             , scope: {
                 dirName: "="
             }//Chaine passée directement

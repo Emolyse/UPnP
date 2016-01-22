@@ -6,7 +6,7 @@ module.exports = function(app,utils) {
             ,scope:{
                 brick:"=brick"
                 ,current:"=current"
-                }//Chaine passée directement
+            }//Chaine passée directement
             ,controllerAs:"mr"
             ,controller:function ($scope,$location,$http) {
                 var ctrl = this;
