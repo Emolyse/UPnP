@@ -66,8 +66,8 @@ module.exports = function(app,utils) {
 
                 ctrl.Browse = function(dir) {
                     var dirId = dir.id ? dir.id : dir;
-                    $scope.context.explorer = utils.Browse($scope.brick.id, dirId);
-                    ctrl.currentDir = dirId;
+                        $scope.context.explorer = utils.Browse($scope,$scope.brick.id, dirId);
+                        ctrl.currentDir = dirId;
                 }
             }
         }

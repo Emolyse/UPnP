@@ -12,7 +12,8 @@ module.exports = function(app,utils) {
                 console.log($scope.context);
                 var ctrl = this;
                 ctrl.Browse = function(brickId,dirId){
-                    console.log("Server", dirId);
+                    console.log("Server", dirId)
+                    utils.Browse($scope,brickId, dirId);
                     $scope.context.explorer = utils.Browse(brickId,dirId);
                     console.log("Server",dirId);
                 };

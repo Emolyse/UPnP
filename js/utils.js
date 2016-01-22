@@ -95,7 +95,7 @@ var utils = {
 
     }
     }
-    , Browse : function (brickId,dirId) {
+    , Browse : function ($scope,brickId,dirId) {
         if(!dirId)
             dirId = 0;
         var explorer = {medias: [], directories: []};
@@ -126,6 +126,9 @@ var utils = {
                         explorer.medias.push( {serverId: brickId, name: title, iconURL: icon, id: item.getAttribute("id")} );
                     }
                     console.log(explorer.medias.length, "medias found");
+                    $scope.$apply(function () {
+                        $scope.context.explorer = explorer;
+                    });
                 }
             });
         return explorer;
