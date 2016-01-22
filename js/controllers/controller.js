@@ -5,6 +5,7 @@ module.exports = function(app,utils) {
         ctrl.firstbrick = {};
         ctrl.context.loadedMedia = '1';
         ctrl.context.rendererId = '-1';
+        ctrl.context.mediaName = "";
         $http.get("/getContext").success(function (data) {
             var init = true;
             for(var i in data.bricks) {
@@ -35,10 +36,6 @@ module.exports = function(app,utils) {
             ctrl.context.medias = [];
 
         });
-
-        ctrl.setRenderer = function (rendererId){
-            ctrl.context.rendererId = rendererId;
-        };
 
         /**********************************************
          *              Mise en forme                 *

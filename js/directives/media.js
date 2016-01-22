@@ -10,16 +10,17 @@ module.exports = function(app,utils) {
             }//Chaine passée directement
             , controllerAs: "mc"
             , controller: function ($scope) {
-                ctrl = this;
+                var ctrl = this;
                 ctrl.updateMedia = function (mediaId) {
                     $scope.context.loadedMedia = mediaId;
                 };
-                ctrl.loadMedias = function (serverId, rendererId, mediaId){
+                ctrl.loadMedias = function (serverId, rendererId, media){
+                    $scope.context.mediaName = media.name;
                     utils.call(rendererId
                         , "loadMedia"
-                        , [serverId, mediaId]
+                        , [serverId, media.id]
                         , function (res) {
-                            $scope.context.loadedMedia = mediaId;
+                            $scope.context.loadedMedia = media.id;
                         });
                 };
             }
