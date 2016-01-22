@@ -7,12 +7,18 @@ module.exports = function(app,utils) {
         ctrl.context.rendererId = '-1';
         ctrl.context.mediaName = "";
         $http.get("/getContext").success(function (data) {
-            var init = true;
+            var initrender= true;
+            var initserver = true;
             for(var i in data.bricks) {
                 ctrl.context.bricks[data.bricks[i].id] = data.bricks[i];
-                if(init &&  ctrl.context.bricks[i].type[2] === "BrickUPnP_MediaServer"){
+                if(initserver &&  ctrl.context.bricks[i].type[2] === "BrickUPnP_MediaServer"){
                     ctrl.firstbrick = data.bricks[i];
-                    init = false;
+                    initserver = false;
+                }
+
+                if(initrender &&  ctrl.context.bricks[i].type[2] === "BrickUPnP_MediaRenderer"){
+                    ctrl.context.rendererId = data.bricks[i].id;
+                    initrender = false;
                 }
             }
 
@@ -36,12 +42,6 @@ module.exports = function(app,utils) {
             ctrl.context.medias = [];
 
         });
-
-        /**********************************************
-         *              Mise en forme                 *
-         **********************************************/
-
-
 
     }]);
 }
